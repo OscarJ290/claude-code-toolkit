@@ -1,0 +1,14 @@
+{
+  "name": "oscarj290",
+  "description": "Skills and tools for Claude Code by Oscar J. Villa Garcia.",
+  "owner": {
+    "name": "Oscar J. Villa Garcia"
+  },
+  "plugins": [
+    {
+      "name": "oscar-toolkit",
+      "source": "./",
+      "description": "Claude Code plugin with skills for repository handoff, project scoping, CFDI validation and Gmail triage, plus a CFDI tools MCP server."
+    }
+  ]
+}
