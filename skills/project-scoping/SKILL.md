@@ -1,6 +1,6 @@
 ---
 name: project-scoping
-description: "Analyzes a client job post or brief for a freelance software or automation project before quoting: checks the client, detects red flags, judges how clear the brief is, lists the questions to ask, estimates hours with a contingency, recommends fixed price or hourly pricing, and states what is out of scope. Use when the user says things like 'scope this project', 'how much should I charge', 'quote this job', 'estimate this project', 'is this job worth it', 'should I bid on this', 'price this' or 'review this client brief'. También se activa con 'cotizar este proyecto', 'cuánto cobro', 'cuánto le cobro', 'vale la pena este trabajo', 'alcance del proyecto' o 'revisa este post'. Produces a scoping analysis only, never the proposal itself. Do not use for estimating internal tasks of a project that is already in progress, for planning sprints, or for writing the cover letter."
+description: "Scopes freelance software or automation jobs and vets client messages before quoting: checks the client, detects red flags and scams, estimates hours and recommends a pricing model. Use for 'scope this project', 'how much should I charge', 'quote this job', 'is this job worth it', 'should I bid on this', 'review this client brief', and when the user asks if a client, message, invitation or offer is legit, suspicious or a scam, even if it is not a real project, because the red flag checks live here: 'is this client legit', 'is this a scam', 'does this offer look suspicious', 'what do you think of this client message'. También: 'cotizar este proyecto', 'cuánto le cobro', 'vale la pena este trabajo', 'revisa este post', 'es estafa', 'es confiable este cliente', 'qué opinas de este mensaje', 'me ofrecieron esto', 'qué opinas antes de ponerle precio'. Analysis only, never the proposal. Do not use for internal tasks of a project already in progress, sprint planning, or writing the cover letter or proposal."
 ---
 
 # Project scoping
@@ -36,6 +36,8 @@ These stop the analysis. If any of them is present, recommend **do not bid**, ex
 * The work falls outside the freelancer's stack or portfolio. If you do not know the portfolio, ask the user once before judging this point. Do not guess.
 
 When a red flag stops the report, the output contains only the Verdict, the Client check and the Red flags sections.
+
+Use this same format even when the message is an obvious scam: the user should always get the Verdict line first.
 
 ### 3. Clarity of the brief
 
