@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -51,6 +53,7 @@ EXPECTED = {
         {"xml_well_formed": "pass", **SKIPPED_AFTER_PARSE, "cfdi_version": "fail"},
     ),
     "malformed.xml": (False, {"xml_well_formed": "fail", **SKIPPED_AFTER_PARSE}),
+    "valid_six_decimals.xml": (True, all_with()),
 }
 
 
@@ -158,8 +161,40 @@ def test_concept_tolerance_is_one_cent() -> None:
     assert statuses(outside)["concept_amounts"] == "fail"
 
 
-def test_subtotal_must_equal_sum_of_importes() -> None:
-    report = variant('SubTotal="1000.00"', 'SubTotal="1000.01"')
+def test_subtotal_tolerance_is_one_cent() -> None:
+    # The Importe values add up to 1000.00, so a SubTotal one cent away is a rounding
+    # difference and two cents away is a real mismatch. Total is left untouched here
+    # because only subtotal_matches is under test.
+    assert statuses(variant('SubTotal="1000.00"', 'SubTotal="1000.01"'))["subtotal_matches"] == "pass"
+    assert statuses(variant('SubTotal="1000.00"', 'SubTotal="999.99"'))["subtotal_matches"] == "pass"
+    assert statuses(variant('SubTotal="1000.00"', 'SubTotal="1000.02"'))["subtotal_matches"] == "fail"
+    assert statuses(variant('SubTotal="1000.00"', 'SubTotal="999.98"'))["subtotal_matches"] == "fail"
+
+
+def test_subtotal_mismatch_message_reports_both_values_and_tolerance() -> None:
+    message = messages(variant('SubTotal="1000.00"', 'SubTotal="1500.00"'))["subtotal_matches"]
+    assert "1500.00" in message
+    assert "1000.00" in message
+    assert "0.01" in message
+
+
+def test_six_decimal_importes_pass_when_rounded_subtotal_matches() -> None:
+    text = load("valid_six_decimals.xml")
+    importes = [Decimal(m) for m in re.findall(r'ValorUnitario="[0-9.]+" Importe="([0-9.]+)"', text)]
+    assert len(importes) == 3
+    assert all(len(str(i).split(".")[1]) == 6 for i in importes)
+    exact_sum = sum(importes, Decimal(0))
+    assert exact_sum == Decimal("336.604929")
+    # The exact sum really differs from SubTotal, which is why exact equality was wrong.
+    assert exact_sum != Decimal("336.60")
+    report = validate(text)
+    assert statuses(report)["subtotal_matches"] == "pass"
+    assert report["summary"]["valid"] is True
+
+
+def test_six_decimal_subtotal_still_catches_real_mismatch() -> None:
+    text = load("valid_six_decimals.xml")
+    report = validate(text.replace('SubTotal="336.60"', 'SubTotal="336.62"'))
     assert statuses(report)["subtotal_matches"] == "fail"
 
 

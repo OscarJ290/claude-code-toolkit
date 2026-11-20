@@ -11,7 +11,7 @@ identical output.
 
 from __future__ import annotations
 
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 FIXTURES_DIR = Path(__file__).resolve().parent.parent / "tests" / "fixtures"
@@ -20,6 +20,7 @@ UUID_VALID = "82012804-7425-4141-8964-5DDD28CC8DE7"
 UUID_TOTALS_MISMATCH = "78852F46-F0CF-4369-B7B7-6DDC0F434FBB"
 UUID_CONCEPT_MISMATCH = "100A8005-316E-4A03-AE53-CFD56CA44AD3"
 UUID_BAD_RFC = "FCE358E1-E03C-4632-A0E5-369944A4EB6E"
+UUID_SIX_DECIMALS = "C3DD4B46-5903-44C6-AD8C-9DB31E235E83"
 
 PLACEHOLDER = "SYNTHETIC"
 TAX_RATE = Decimal("0.16")
@@ -30,9 +31,22 @@ DEFAULT_CONCEPTS = (
     ("1", "500.00", "500.00", None),
 )
 
+# Importe values with 6 decimals. Their exact sum is 336.604929, which the
+# document rounds to a SubTotal of 336.60, so the two differ by less than 0.01.
+SIX_DECIMAL_CONCEPTS = (
+    ("3", "33.333333", "99.999999", None),
+    ("1.5", "100.123456", "150.185184", None),
+    ("7", "12.345678", "86.419746", None),
+)
+
+
+def fmt(value: Decimal, places: int) -> str:
+    """Round half up to the given number of decimal places and format as text."""
+    return f"{value.quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP)}"
+
 
 def money(value: Decimal) -> str:
-    return f"{value.quantize(Decimal('0.01'))}"
+    return fmt(value, 2)
 
 
 def build_cfdi40(
@@ -41,8 +55,14 @@ def build_cfdi40(
     receptor_rfc: str = "XAXX010101000",
     concepts: tuple[tuple[str, str, str, str | None], ...] = DEFAULT_CONCEPTS,
     total_override: str | None = None,
+    places: int = 2,
 ) -> str:
-    """Build a CFDI 4.0 ingreso document. Totals are consistent unless overridden."""
+    """Build a CFDI 4.0 ingreso document. Totals are consistent unless overridden.
+
+    places is the number of decimals used for the tax base and tax amount of each
+    concept. The document level SubTotal and taxes are always rounded to 2 decimals,
+    as the SAT rules do for a currency with 2 decimals.
+    """
     concept_xml: list[str] = []
     subtotal = Decimal(0)
     discount_total = Decimal(0)
@@ -53,7 +73,7 @@ def build_cfdi40(
         amount_d = Decimal(amount)
         discount_d = Decimal(discount) if discount else Decimal(0)
         base = amount_d - discount_d
-        tax = (base * TAX_RATE).quantize(Decimal("0.01"))
+        tax = (base * TAX_RATE).quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP)
         subtotal += amount_d
         discount_total += discount_d
         base_total += base
@@ -65,13 +85,15 @@ def build_cfdi40(
             f'{discount_attr} ObjetoImp="02">\n'
             f"      <cfdi:Impuestos>\n"
             f"        <cfdi:Traslados>\n"
-            f'          <cfdi:Traslado Base="{money(base)}" Impuesto="002" TipoFactor="Tasa" '
-            f'TasaOCuota="0.160000" Importe="{money(tax)}"/>\n'
+            f'          <cfdi:Traslado Base="{fmt(base, places)}" Impuesto="002" TipoFactor="Tasa" '
+            f'TasaOCuota="0.160000" Importe="{fmt(tax, places)}"/>\n'
             f"        </cfdi:Traslados>\n"
             f"      </cfdi:Impuestos>\n"
             f"    </cfdi:Concepto>"
         )
 
+    subtotal = subtotal.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    tax_total = tax_total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
     total = subtotal - discount_total + tax_total
     total_text = total_override if total_override is not None else money(total)
     discount_attr_root = f' Descuento="{money(discount_total)}"' if discount_total else ""
@@ -105,7 +127,7 @@ def build_cfdi40(
         "  <cfdi:Conceptos>\n" + "\n".join(concept_xml) + "\n  </cfdi:Conceptos>\n"
         f'  <cfdi:Impuestos TotalImpuestosTrasladados="{money(tax_total)}">\n'
         "    <cfdi:Traslados>\n"
-        f'      <cfdi:Traslado Base="{money(base_total)}" Impuesto="002" TipoFactor="Tasa" '
+        f'      <cfdi:Traslado Base="{fmt(base_total, places)}" Impuesto="002" TipoFactor="Tasa" '
         f'TasaOCuota="0.160000" Importe="{money(tax_total)}"/>\n'
         "    </cfdi:Traslados>\n"
         "  </cfdi:Impuestos>\n" + complemento + "</cfdi:Comprobante>\n"
@@ -154,6 +176,9 @@ def build_all() -> dict[str, str]:
         "no_timbre.xml": build_cfdi40(uuid=None),
         "version_33.xml": build_cfdi33(),
         "malformed.xml": build_malformed(),
+        "valid_six_decimals.xml": build_cfdi40(
+            uuid=UUID_SIX_DECIMALS, concepts=SIX_DECIMAL_CONCEPTS, places=6
+        ),
     }
 
 

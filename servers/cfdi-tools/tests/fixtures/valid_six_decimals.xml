@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="SYN" Folio="1" Fecha="2024-01-15T10:30:00" Sello="SYNTHETIC" FormaPago="01" NoCertificado="SYNTHETIC" Certificado="SYNTHETIC" SubTotal="336.60" Moneda="MXN" Total="390.46" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="20257">
+  <cfdi:Emisor Rfc="EKU9003173C9" Nombre="ESCUELA KEMPER URGATE" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="XAXX010101000" Nombre="PUBLICO EN GENERAL" DomicilioFiscalReceptor="20257" RegimenFiscalReceptor="616" UsoCFDI="S01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="3" ClaveUnidad="H87" Descripcion="SYNTHETIC ITEM" ValorUnitario="33.333333" Importe="99.999999" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="99.999999" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.000000"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1.5" ClaveUnidad="H87" Descripcion="SYNTHETIC ITEM" ValorUnitario="100.123456" Importe="150.185184" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="150.185184" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="24.029629"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="7" ClaveUnidad="H87" Descripcion="SYNTHETIC ITEM" ValorUnitario="12.345678" Importe="86.419746" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="86.419746" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.827159"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="53.86">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="336.604929" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="53.86"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="C3DD4B46-5903-44C6-AD8C-9DB31E235E83" FechaTimbrado="2024-01-15T10:31:00" RfcProvCertif="SYNTHETIC" SelloCFD="SYNTHETIC" NoCertificadoSAT="SYNTHETIC" SelloSAT="SYNTHETIC"/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

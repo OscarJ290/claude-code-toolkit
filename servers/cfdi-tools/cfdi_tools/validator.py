@@ -392,13 +392,21 @@ def _check_subtotal(root: Element) -> Check:
         )
     except ValueError as exc:
         return Check(check_id, FAIL, str(exc) + ".")
-    if total_importes != subtotal:
+    # Importe admits up to 6 decimals while SubTotal is rounded to the decimals of
+    # the currency, so the two can legitimately differ by a rounding amount.
+    if abs(total_importes - subtotal) > TOLERANCE:
         return Check(
             check_id,
             FAIL,
-            f"SubTotal is {subtotal} but the Concepto Importe values add up to {total_importes}.",
+            f"SubTotal is {subtotal} but the Concepto Importe values add up to {total_importes} "
+            f"(tolerance {TOLERANCE}).",
         )
-    return Check(check_id, PASS, f"SubTotal {subtotal} equals the sum of the Concepto Importe values.")
+    return Check(
+        check_id,
+        PASS,
+        f"SubTotal {subtotal} matches the sum of the Concepto Importe values {total_importes} "
+        f"(tolerance {TOLERANCE}).",
+    )
 
 
 def _check_total(root: Element) -> Check:
