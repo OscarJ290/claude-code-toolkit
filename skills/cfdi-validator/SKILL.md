@@ -13,7 +13,7 @@ Follow these steps in order.
 
 ### 1. Get the XML
 
-* If the user gives a path, read that file.
+* If the user gives a path, read that file with the Read tool. Do not run shell commands for this skill, not even to read or locate the file.
 * If the user pastes the XML, use the pasted text as it is.
 * If neither is present, ask once for the file or the text.
 
@@ -58,6 +58,8 @@ You may offer a manual review of the XML instead. If the user accepts, label the
 * Never say a CFDI is valid before the SAT. The tools cannot see the SAT.
 * Do not modify, reformat or write the XML, and do not offer to correct the file.
 * Do not generate, stamp or cancel invoices.
+* Every number in the report must come from the tool output or appear literally in the XML. You may state the difference between two amounts the tool reported; do not compute any other sum, base or difference yourself.
+* Do not guess the cause of a failed check with your own arithmetic. When more than one field could be the wrong one, list them as possibilities and say that the XML alone cannot tell which.
 
 ## Reference
 
