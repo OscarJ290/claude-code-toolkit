@@ -1,5 +1,5 @@
 {
-  "name": "oscar-toolkit",
+  "name": "freelance-toolkit",
   "version": "0.1.0",
   "description": "Claude Code plugin with skills for repository handoff, project scoping, CFDI validation and Gmail triage, plus a CFDI tools MCP server.",
   "author": {
