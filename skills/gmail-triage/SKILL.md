@@ -87,4 +87,4 @@ Close the report by saying that nothing was sent, that the drafts are only draft
 
 ## Reference
 
-See `references/approved-responses.md` for the templates, `examples/inbox/` for five synthetic emails and `examples/expected-output.md` for the report expected for them.
+The templates live in `references/approved-responses.md`. The `examples/` folder is test material for this skill, not input for a run. Never read `examples/expected-output.md` while triaging: it is the answer key used to check this skill, and reading it would invalidate the result.
