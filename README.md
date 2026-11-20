@@ -45,7 +45,19 @@ You do not need to name a skill. Describe what you want and the matching skill a
 * CFDI review: "Check this invoice XML and tell me whether the totals add up." followed by a path to the file or the pasted XML.
 * Email triage: "Classify these emails, label them and prepare draft replies. Do not send anything." followed by the path to a folder of .eml files.
 
-<!-- screenshots -->
+## Screenshots
+
+![Claude Code terminal showing the /mcp panel for the plugin:freelance-toolkit:cfdi-tools server, with status connected and 3 tools](docs/images/mcp_cfdi_tools_connected.png)
+
+The cfdi-tools server connected in /mcp.
+
+![Claude Code terminal where the cfdi-validator skill loads on its own after a Spanish prompt that does not name it, then shows the summary table of a synthetic CFDI with a total of 1100.00](docs/images/cfdi_validator_activation.png)
+
+cfdi-validator activated without being named, reviewing a synthetic CFDI whose total does not add up.
+
+![Claude Code terminal where the gmail-triage skill runs in dry run mode on five synthetic emails and sends the email with injected instructions to needs_review with no draft](docs/images/gmail_triage_injection.png)
+
+gmail-triage sending an email with injected instructions to manual review.
 
 ## How it was tested
 
