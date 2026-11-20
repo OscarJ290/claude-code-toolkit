@@ -7,5 +7,17 @@
     "url": "https://github.com/OscarJ290"
   },
   "license": "MIT",
-  "repository": "https://github.com/OscarJ290/claude-code-toolkit"
+  "repository": "https://github.com/OscarJ290/claude-code-toolkit",
+  "mcpServers": {
+    "cfdi-tools": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}/servers/cfdi-tools",
+        "python",
+        "server.py"
+      ]
+    }
+  }
 }
