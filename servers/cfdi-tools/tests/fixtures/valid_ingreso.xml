@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="SYN" Folio="1" Fecha="2024-01-15T10:30:00" Sello="SYNTHETIC" FormaPago="01" NoCertificado="SYNTHETIC" Certificado="SYNTHETIC" SubTotal="1000.00" Descuento="100.00" Moneda="MXN" Total="1044.00" TipoDeComprobante="I" Exportacion="01" MetodoPago="PUE" LugarExpedicion="20257">
+  <cfdi:Emisor Rfc="EKU9003173C9" Nombre="ESCUELA KEMPER URGATE" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="XAXX010101000" Nombre="PUBLICO EN GENERAL" DomicilioFiscalReceptor="20257" RegimenFiscalReceptor="616" UsoCFDI="S01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="2" ClaveUnidad="H87" Descripcion="SYNTHETIC ITEM" ValorUnitario="250.00" Importe="500.00" Descuento="100.00" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="400.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="64.00"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="01010101" Cantidad="1" ClaveUnidad="H87" Descripcion="SYNTHETIC ITEM" ValorUnitario="500.00" Importe="500.00" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="500.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="80.00"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="144.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="900.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="144.00"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="82012804-7425-4141-8964-5DDD28CC8DE7" FechaTimbrado="2024-01-15T10:31:00" RfcProvCertif="SYNTHETIC" SelloCFD="SYNTHETIC" NoCertificadoSAT="SYNTHETIC" SelloSAT="SYNTHETIC"/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

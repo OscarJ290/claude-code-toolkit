@@ -1,0 +1,18 @@
+[project]
+name = "cfdi-tools"
+version = "0.1.0"
+description = "MCP server that runs structural and arithmetic checks on CFDI 4.0 XML files."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=2.3,<3",
+    "defusedxml>=0.7.1,<0.8",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
