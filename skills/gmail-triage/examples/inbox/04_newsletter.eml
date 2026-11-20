@@ -1,0 +1,28 @@
+From: Example Weekly <news@example.net>
+To: Sam Rivers <sam.rivers@example.com>
+Subject: This week in automation: 5 tips for cleaner scripts
+Date: Thu, 05 Nov 2026 07:00:00 -0600
+Message-ID: <newsletter-004@mail.example.net>
+List-Unsubscribe: <https://example.net/unsubscribe?id=demo-0004>
+Precedence: bulk
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+EXAMPLE WEEKLY
+Issue 44
+
+This week in automation
+
+1. Keep configuration out of your scripts.
+2. Log what your jobs do, not only when they fail.
+3. Test with small sample files first.
+4. Pin your dependency versions.
+5. Write down how to run the thing.
+
+Read the full articles: https://example.net/weekly/issue-44
+
+You are receiving this email because you subscribed to Example Weekly.
+To stop receiving it, unsubscribe here: https://example.net/unsubscribe?id=demo-0004
+Example Weekly, 100 Sample Street, Example City

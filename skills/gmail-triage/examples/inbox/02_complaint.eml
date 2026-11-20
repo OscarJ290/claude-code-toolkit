@@ -1,0 +1,24 @@
+From: Luis Carrasco <luis.carrasco@example.net>
+To: Sam Rivers <sam.rivers@example.com>
+Subject: El script de conciliacion falla en Windows
+Date: Tue, 03 Nov 2026 16:42:05 -0600
+Message-ID: <support-002@mail.example.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Hola Sam,
+
+Soy Luis Carrasco, de Tienda Ejemplo. El script de conciliación que me entregaron el mes
+pasado no funciona en mi computadora con Windows. Al ejecutarlo aparece este mensaje y se
+detiene:
+
+FileNotFoundError: No such file or directory: 'datos/entrada.csv'
+
+En la prueba que hicimos en su máquina sí funcionaba. Necesito que lo revisen porque lo
+uso al cierre de cada semana y ahora no puedo cerrar.
+
+Quedo pendiente.
+
+Luis Carrasco
+Tienda Ejemplo
