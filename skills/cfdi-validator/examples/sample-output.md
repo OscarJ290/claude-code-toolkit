@@ -42,12 +42,12 @@ calling `summarize_cfdi` and `validate_cfdi` on the `cfdi-tools` MCP server with
 The tool reported: Total is 1100.00 but SubTotal 1000.00 minus Descuento 100.00 plus
 TotalImpuestosTrasladados 144.00 minus TotalImpuestosRetenidos 0 = 1044.00.
 
-This check adds up the invoice the way the SAT does. It takes the subtotal, subtracts the discount
+This check adds up the invoice the way CFDI 4.0 defines its total. It takes the subtotal, subtracts the discount
 (`Descuento`), adds the taxes charged to the client (`TotalImpuestosTrasladados`, the VAT in this case)
 and subtracts the taxes withheld (`TotalImpuestosRetenidos`). That arithmetic gives 1044.00 pesos, but
 the invoice declares a total of 1100.00 pesos, so the file is off by 56.00 pesos.
 
-What to look at: the `Total` attribute of `cfdi:Comprobante`, the `Descuento` attribute next to it and
+What to look at: the `Total`, `SubTotal` and `Descuento` attributes of `cfdi:Comprobante` and
 the `TotalImpuestosTrasladados` attribute of `cfdi:Impuestos`. One of those four numbers is the wrong
 one, and the XML alone cannot say which. Whoever issued the invoice has to reissue it, because editing
 the file would invalidate its seal.
